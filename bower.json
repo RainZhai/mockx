@@ -1,0 +1,23 @@
+{
+    "name": "mockx",
+    "version": "0.0.1",
+    "authors": [
+        "rainzhai"
+    ],
+    "description": "mock",
+    "keywords": [
+        "mock api"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "public/libs",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "bootstrap": "~3.1.0"
+    }
+}
