@@ -3,17 +3,18 @@
     .page-header.clearfix
       h1= title
       .col-md-4
-        small 重度科幻迷
+        
       .col-md-8
         form(method='GET', action='/results')
           .input-group.col-sm-4.pull-right
             input.form-control(type='text', name='q')
             span.input-group-btn
               button.btn.btn-default(type='submit') 搜索
-.navbar.navbar-default.navbar-fixed-bottom
+.navbar.navbar-default.navbar-fixed-top
   .container
     .navbar-header
-      a.navbar-brand(href="/") 重度科幻迷
+      a(href="/admin/mock/new") 新增mock数据
+      a(href="/admin/mock/list") 获取mock列表
     if user
       p.navbar-text.navbar-right
         span 欢迎您,#{user.name}

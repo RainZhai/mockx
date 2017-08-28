@@ -2,9 +2,13 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
 
-var CategorySchema = new Schema({
+var MockSchema = new Schema({
     name: String,
-    mocks: [{ type: ObjectId, ref: 'Mock' }],
+    json: String,
+    category: {
+        type: ObjectId,
+        ref: 'Category'
+    },
     meta: {
         createAt: {
             type: Date,
@@ -18,7 +22,7 @@ var CategorySchema = new Schema({
 })
 
 // var ObjectId = mongoose.Schema.Types.ObjectId
-CategorySchema.pre('save', function(next) {
+MockSchema.pre('save', function(next) {
     if (this.isNew) {
         this.meta.createAt = this.meta.updateAt = Date.now()
     } else {
@@ -28,7 +32,7 @@ CategorySchema.pre('save', function(next) {
     next()
 })
 
-CategorySchema.statics = {
+MockSchema.statics = {
     fetch: function(cb) {
         return this
             .find({})
@@ -42,4 +46,4 @@ CategorySchema.statics = {
     }
 }
 
-module.exports = CategorySchema
+module.exports = MovieSchema

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-var Movie = mongoose.model('Movie')
+var Mock = mongoose.model('Mock')
 var Category = mongoose.model('Category')
 
 // index page
@@ -7,7 +7,7 @@ exports.index = function(req, res) {
     Category
         .find({})
         .populate({
-            path: 'movies',
+            path: 'mocks',
             select: 'title poster',
             options: { limit: 6 }
         })
@@ -35,7 +35,7 @@ exports.search = function(req, res) {
         Category
             .find({ _id: catId })
             .populate({
-                path: 'movies',
+                path: 'mocks',
                 select: 'title poster'
             })
             .exec(function(err, categories) {
@@ -43,34 +43,34 @@ exports.search = function(req, res) {
                     console.log(err)
                 }
                 var category = categories[0] || {}
-                var movies = category.movies || []
-                var results = movies.slice(index, index + count)
+                var mocks = category.mocks || []
+                var results = mocks.slice(index, index + count)
 
                 res.render('results', {
                     title: '结果列表页面',
                     keyword: category.name,
                     currentPage: (page + 1),
                     query: 'cat=' + catId,
-                    totalPage: Math.ceil(movies.length / count),
-                    movies: results
+                    totalPage: Math.ceil(mocks.length / count),
+                    mocks: results
                 })
             })
     } else {
         Movie
             .find({ title: new RegExp(q + '.*', 'i') })
-            .exec(function(err, movies) {
+            .exec(function(err, mocks) {
                 if (err) {
                     console.log(err)
                 }
-                var results = movies.slice(index, index + count)
+                var results = mocks.slice(index, index + count)
 
                 res.render('results', {
                     title: '结果列表页面',
                     keyword: q,
                     currentPage: (page + 1),
                     query: 'q=' + q,
-                    totalPage: Math.ceil(movies.length / count),
-                    movies: results
+                    totalPage: Math.ceil(mocks.length / count),
+                    mocks: results
                 })
             })
     }
