@@ -46,4 +46,4 @@ MockSchema.statics = {
     }
 }
 
-module.exports = MovieSchema
+module.exports = MockSchema

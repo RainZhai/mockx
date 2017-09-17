@@ -9,17 +9,11 @@ var path = require('path')
 exports.detail = function(req, res) {
     var id = req.params.id
 
-    Mock.findById(id, function(err, movie) {
-        Comment
-            .find({ movie: id })
-            .populate('from', 'name')
-            .populate('reply.from reply.to', 'name')
-            .exec(function(err, comments) {
-                res.render('detail', {
-                    title: 'mockx 详情页',
-                    movie: movie
-                })
-            })
+    Mock.findById(id, function(err, mock) {
+        res.render('detail', {
+            title: 'mockx 详情页',
+            mock: mock
+        })
     })
 }
 
@@ -29,7 +23,7 @@ exports.new = function(req, res) {
         res.render('admin', {
             title: 'mockx 后台录入页',
             categories: categories,
-            movie: {}
+            mock: {}
         })
     })
 }
@@ -53,28 +47,10 @@ exports.update = function(req, res) {
 
 // admin poster
 exports.savePoster = function(req, res, next) {
-    var posterData = req.files.uploadPoster
-    var filePath = posterData.path
-    var originalFilename = posterData.originalFilename
-
-    if (originalFilename) {
-        fs.readFile(filePath, function(err, data) {
-            var timestamp = Date.now()
-            var type = posterData.type.split('/')[1]
-            var poster = timestamp + '.' + type
-            var newPath = path.join(__dirname, '../../', '/public/upload/' + poster)
-
-            fs.writeFile(newPath, data, function(err) {
-                req.poster = poster
-                next()
-            })
-        })
-    } else {
-        next()
-    }
+    next()
 }
 
-// admin post movie
+// admin post mock
 exports.save = function(req, res) {
     var id = req.body.mock._id
     var mockObj = req.body.mock
@@ -96,7 +72,7 @@ exports.save = function(req, res) {
                     console.log(err)
                 }
 
-                res.redirect('/mock/' + movie._id)
+                res.redirect('/mock/' + mock._id)
             })
         })
     } else {
@@ -125,7 +101,7 @@ exports.save = function(req, res) {
 
                 category.save(function(err, category) {
                     mock.category = category._id
-                    mock.save(function(err, movie) {
+                    mock.save(function(err, mock) {
                         res.redirect('/mock/' + mock._id)
                     })
                 })
@@ -155,7 +131,7 @@ exports.del = function(req, res) {
     var id = req.query.id
 
     if (id) {
-        Mock.remove({ _id: id }, function(err, movie) {
+        Mock.remove({ _id: id }, function(err, mock) {
             if (err) {
                 console.log(err)
                 res.json({ success: 0 })
