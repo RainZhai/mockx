@@ -29,7 +29,8 @@
     },
     "devDependencies": {},
     "scripts": {
-        "test": "grunt test"
+        "test": "grunt test",
+        "start": "node app.js"
     },
     "repository": {
         "type": "git",
