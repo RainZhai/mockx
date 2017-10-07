@@ -12,9 +12,14 @@
               button.btn.btn-default(type='submit') 搜索
 .navbar.navbar-default.navbar-fixed-top
   .container
-    .navbar-header
-      a(href="/admin/mock/new") 新增mock数据
+    p.navbar-text.navbar-header
+      a(href="/admin/mock/new") 新增mock数据 
+      span &nbsp;
       a(href="/admin/mock/list") 获取mock列表
+      span &nbsp;
+      a(href="/admin/category/list") 获取分类列表
+      span &nbsp;
+      a(href="/admin/category/new") 添加分类
     if user
       p.navbar-text.navbar-right
         span 欢迎您,#{user.name}

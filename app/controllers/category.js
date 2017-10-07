@@ -3,36 +3,36 @@ var Category = mongoose.model('Category')
 
 // admin new page
 exports.new = function(req, res) {
-  res.render('category_admin', {
-    title: 'imooc 后台分类录入页',
-    category: {}
-  })
+    res.render('category_admin', {
+        title: '分类录入页',
+        category: {}
+    })
 }
 
-// admin post movie
+// admin post
 exports.save = function(req, res) {
-  var _category = req.body.category
-  var category = new Category(_category)
+    var _category = req.body.category
+    var category = new Category(_category)
 
-  category.save(function(err, category) {
-    if (err) {
-      console.log(err)
-    }
+    category.save(function(err, category) {
+        if (err) {
+            console.log(err)
+        }
 
-    res.redirect('/admin/category/list')
-  })
+        res.redirect('/admin/category/list')
+    })
 }
 
 // catelist page
 exports.list = function(req, res) {
-  Category.fetch(function(err, catetories) {
-    if (err) {
-      console.log(err)
-    }
+    Category.fetch(function(err, catetories) {
+        if (err) {
+            console.log(err)
+        }
 
-    res.render('categorylist', {
-      title: 'imooc 分类列表页',
-      catetories: catetories
+        res.render('categorylist', {
+            title: '分类列表页',
+            catetories: catetories
+        })
     })
-  })
 }

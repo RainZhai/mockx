@@ -7,15 +7,12 @@ block content
         .panel-heading
           h3 #{keyword}
         .panel-body
-          if movies && movies.length > 0
-            each item in movies
-              .col-md-2
-                .thumbnail
-                  a(href="/movie/#{item._id}")
-                    img(src="#{item.poster}", alt="#{item.title}")
-                  .caption
-                    h4 #{item.title}
-                    p: a.btn.btn-primary(href="/movie/#{item._id}", role="button") 观看预告片
+          if mocks && mocks.length > 0
+            each item in mocks
+              .col-md-2  
+                    h3 #{item.name}
+                    p
+                      a.btn.btn-primary(href="/mock/#{item._id}", role="button")查看
       ul.pagination
         - for (var i = 0; i < totalPage; i++) {
           - if (currentPage == (i + 1)) {

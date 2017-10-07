@@ -10,15 +10,17 @@ block content
           label.col-sm-2.control-label(for="inputCategory") 分类
           .col-sm-10
             input#inputCategory.form-control(type="text", name="mock[categoryName]", value=mock.categoryName)
-        .form-group
-          label.col-sm-2.control-label 分类选择
-          each cat in categories
-            label.radio-inline
-              if mock.category
-                input(type="radio", name="mock[category]", value=cat._id, checked=cat._id.toString()==mock.category.toString())
-              else
-                input(type="radio", name="mock[category]", value=cat._id)
-              | #{cat.name}
+        if categories.length>0
+          .form-group
+            label.col-sm-2.control-label 分类选择
+            .col-sm-10
+              each cat in categories
+                label.radio-inline
+                  if mock.category
+                    input(type="radio", name="mock[category]", value=cat._id, checked=cat._id.toString()==mock.category.toString())
+                  else
+                    input(type="radio", name="mock[category]", value=cat._id)
+                  | #{cat.name}
         .form-group
           label.col-sm-2.control-label(for="inputName") 名字
           .col-sm-10
@@ -26,8 +28,9 @@ block content
         .form-group
           label.col-sm-2.control-label(for="inputJson") json内容
           .col-sm-10
-            input#inputJson.form-control(type="text", name="mock[json]", value=mock.json)
+            textarea#inputJson.form-control(type="text", name="mock[json]", value=mock.json)=mock.json
         .form-group
-          .col-sm-offset-2.col-sm-10
-          button.btn.btn-default(type="submit") 录入
+          .col-sm-2
+          .col-sm-10
+            button.btn.btn-default(type="submit") 录入
   script(src='/build/admin.min.js')

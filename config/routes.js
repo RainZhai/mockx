@@ -28,6 +28,7 @@ module.exports = function(app) {
 
     // mock
     app.get('/mock/:id', Mock.detail)
+    app.get('/mock/:categoryName/:name', Mock.jsonDetail)
     app.get('/admin/mock/new', User.signinRequired, User.adminRequired, Mock.new)
     app.get('/admin/mock/update/:id', User.signinRequired, User.adminRequired, Mock.update)
     app.post('/admin/mock', User.signinRequired, User.adminRequired, Mock.savePoster, Mock.save)

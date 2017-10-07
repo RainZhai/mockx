@@ -36,7 +36,7 @@ exports.search = function(req, res) {
             .find({ _id: catId })
             .populate({
                 path: 'mocks',
-                select: 'title poster'
+                select: 'name poster'
             })
             .exec(function(err, categories) {
                 if (err) {
@@ -46,6 +46,7 @@ exports.search = function(req, res) {
                 var mocks = category.mocks || []
                 var results = mocks.slice(index, index + count)
 
+                console.log("mocks111--" + mocks)
                 res.render('results', {
                     title: '结果列表页面',
                     keyword: category.name,
@@ -56,14 +57,14 @@ exports.search = function(req, res) {
                 })
             })
     } else {
-        Movie
-            .find({ title: new RegExp(q + '.*', 'i') })
+        Mock
+            .find({ name: new RegExp(q + '.*', 'i') })
             .exec(function(err, mocks) {
                 if (err) {
                     console.log(err)
                 }
                 var results = mocks.slice(index, index + count)
-
+                console.log("mocks222--" + mocks)
                 res.render('results', {
                     title: '结果列表页面',
                     keyword: q,
