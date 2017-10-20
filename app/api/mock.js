@@ -10,7 +10,7 @@ exports.detail = function(req, res) {
     var id = req.params.id
 
     Mock.findById(id, function(err, mock) {
-        res.json({
+        res.jsonp({
             success: true,
             data: {
                 title: 'mockx 详情页',
@@ -27,7 +27,7 @@ exports.jsonDetail = function(req, res) {
 
     Category.findOne({ "name": categoryName }, function(err, category) {
         Mock.findOne({ "category": category.id, "name": name }, function(err, mock) {
-            res.json({
+            res.jsonp({
                 data: mock.json
             })
         })
@@ -37,7 +37,7 @@ exports.jsonDetail = function(req, res) {
 // admin new page
 exports.new = function(req, res) {
     Category.find({}, function(err, categories) {
-        res.json({
+        res.jsonp({
             success: true,
             data: {
                 title: 'mockx 后台录入页',
@@ -55,7 +55,7 @@ exports.update = function(req, res) {
     if (id) {
         Mock.findById(id, function(err, mock) {
             Category.find({}, function(err, categories) {
-                res.json({
+                res.jsonp({
                     success: true,
                     data: {
                         title: 'mockx 后台更新页',
@@ -87,15 +87,15 @@ exports.save = function(req, res) {
         Mock.findById(id, function(err, mock) {
             if (err) {
                 console.log(err)
-                res.json({ success: false })
+                res.jsonp({ success: false })
             } else {
                 _mock = _.extend(mock, mockObj)
                 _mock.save(function(err, mock) {
                     if (err) {
                         console.log(err)
-                        res.json({ success: false })
+                        res.jsonp({ success: false })
                     } else {
-                        res.json({
+                        res.jsonp({
                             success: true,
                             msg: "保存成功"
                         })
@@ -118,7 +118,7 @@ exports.save = function(req, res) {
                     category.mocks.push(mock._id)
 
                     category.save(function(err, category) {
-                        res.json({
+                        res.jsonp({
                             success: true,
                             msg: "保存成功"
                         })
@@ -133,7 +133,7 @@ exports.save = function(req, res) {
                 category.save(function(err, category) {
                     mock.category = category._id
                     mock.save(function(err, mock) {
-                        res.json({
+                        res.jsonp({
                             success: true,
                             msg: "保存成功"
                         })
@@ -151,9 +151,9 @@ exports.list = function(req, res) {
         .exec(function(err, mocks) {
             if (err) {
                 console.log(err)
-                res.json({ success: false })
+                res.jsonp({ success: false })
             } else {
-                res.json({
+                res.jsonp({
                     success: true,
                     data: {
                         title: 'mockx 列表页',
@@ -172,9 +172,9 @@ exports.del = function(req, res) {
         Mock.remove({ _id: id }, function(err, mock) {
             if (err) {
                 console.log(err)
-                res.json({ success: 0 })
+                res.jsonp({ success: 0 })
             } else {
-                res.json({ success: 1 })
+                res.jsonp({ success: 1 })
             }
         })
     }

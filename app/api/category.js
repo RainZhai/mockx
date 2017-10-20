@@ -17,9 +17,9 @@ exports.save = function(req, res) {
     category.save(function(err, category) {
         if (err) {
             console.log(err)
-            res.json({ success: false })
+            res.jsonp({ success: false })
         } else {
-            res.json({
+            res.jsonp({
                 success: true,
                 msg: "保存成功"
             })
@@ -32,9 +32,9 @@ exports.list = function(req, res) {
     Category.fetch(function(err, catetories) {
         if (err) {
             console.log(err)
-            res.json({ success: false })
+            res.jsonp({ success: false })
         } else {
-            res.json({
+            res.jsonp({
                 success: true,
                 data: {
                     catetories: catetories

@@ -14,9 +14,9 @@ exports.index = function(req, res) {
         .exec(function(err, categories) {
             if (err) {
                 console.log(err)
-                res.json({ success: false })
+                res.jsonp({ success: false })
             } else {
-                res.json({
+                res.jsonp({
                     success: true,
                     data: {
                         categories: categories
@@ -44,14 +44,14 @@ exports.search = function(req, res) {
             .exec(function(err, categories) {
                 if (err) {
                     console.log(err)
-                    res.json({ success: false })
+                    res.jsonp({ success: false })
                 } else {
                     var category = categories[0] || {}
                     var mocks = category.mocks || []
                     var results = mocks.slice(index, index + count)
 
                     console.log("mocks111--" + mocks)
-                    res.json({
+                    res.jsonp({
                         success: true,
                         data: {
                             title: '结果列表页面',
@@ -70,11 +70,11 @@ exports.search = function(req, res) {
             .exec(function(err, mocks) {
                 if (err) {
                     console.log(err)
-                    res.json({ success: false })
+                    res.jsonp({ success: false })
                 } else {
                     var results = mocks.slice(index, index + count)
                     console.log("mocks222--" + mocks)
-                    res.json({
+                    res.jsonp({
                         success: true,
                         data: {
                             title: '结果列表页面',

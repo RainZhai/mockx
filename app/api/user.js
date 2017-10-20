@@ -20,10 +20,10 @@ exports.signup = function(req, res) {
     User.findOne({ name: _user.name }, function(err, user) {
         if (err) {
             console.log(err)
-            res.json({ success: false })
+            res.jsonp({ success: false })
         } else {
             if (user) {
-                res.json({
+                res.jsonp({
                     success: true,
                     msg: "已经注册"
                 })
@@ -32,9 +32,9 @@ exports.signup = function(req, res) {
                 user.save(function(err, user) {
                     if (err) {
                         console.log(err)
-                        res.json({ success: false })
+                        res.jsonp({ success: false })
                     } else {
-                        res.json({
+                        res.jsonp({
                             success: true,
                             msg: "注册成功"
                         })
@@ -54,10 +54,10 @@ exports.signin = function(req, res) {
     User.findOne({ name: name }, function(err, user) {
         if (err) {
             console.log(err)
-            res.json({ success: false })
+            res.jsonp({ success: false })
         } else {
             if (!user) {
-                res.json({
+                res.jsonp({
                     success: false,
                     msg: "帐号不存在，请先注册"
                 })
@@ -65,17 +65,17 @@ exports.signin = function(req, res) {
             user.comparePassword(password, function(err, isMatch) {
                 if (err) {
                     console.log(err)
-                    res.json({ success: false })
+                    res.jsonp({ success: false })
                 } else {
                     if (isMatch) {
                         req.session.user = user
 
-                        res.json({
+                        res.jsonp({
                             success: true,
                             msg: "登录成功"
                         })
                     } else {
-                        res.json({
+                        res.jsonp({
                             success: false,
                             msg: "密码不正确，请重新登陆"
                         })
@@ -90,7 +90,7 @@ exports.signin = function(req, res) {
 exports.logout = function(req, res) {
     delete req.session.user
         //delete app.locals.user
-    res.json({
+    res.jsonp({
         success: true,
         msg: "已经登出"
     })
@@ -101,9 +101,9 @@ exports.list = function(req, res) {
     User.fetch(function(err, users) {
         if (err) {
             console.log(err)
-            res.json({ success: false })
+            res.jsonp({ success: false })
         } else {
-            res.json({
+            res.jsonp({
                 success: true,
                 data: {
                     title: '用户列表页',
@@ -119,7 +119,7 @@ exports.signinRequired = function(req, res, next) {
     var user = req.session.user
 
     if (!user) {
-        res.json({
+        res.jsonp({
             success: false,
             msg: "请重新登陆"
         })
@@ -132,7 +132,7 @@ exports.adminRequired = function(req, res, next) {
     var user = req.session.user
 
     if (user.role <= 10) {
-        res.json({
+        res.jsonp({
             success: false,
             msg: "无权限请重新登陆"
         })
