@@ -75,8 +75,8 @@ exports.savePoster = function(req, res, next) {
 
 // admin post mock
 exports.save = function(req, res) {
-    var id = req.body.mock._id
-    var mockObj = req.body.mock
+    var id = req.query.mock._id
+    var mockObj = req.query.mock
     var _mock
 
     if (req.poster) {

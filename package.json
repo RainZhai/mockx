@@ -30,7 +30,8 @@
     "devDependencies": {},
     "scripts": {
         "test": "grunt test",
-        "start": "node app.js"
+        "start": "node app.js",
+        "startapi": "node app.js api"
     },
     "repository": {
         "type": "git",

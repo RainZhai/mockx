@@ -6,6 +6,8 @@ var port = process.env.PORT || 3000
 var app = express()
 var fs = require('fs')
 var dbUrl = 'mongodb://127.0.0.1:27017/mockx'
+var arguments = process.argv.splice(2);
+console.log('所传递的参数是：', arguments);
 
 mongoose.connect(dbUrl)
 
@@ -47,8 +49,11 @@ if ('development' === app.get('env')) {
     app.locals.pretty = true
         //mongoose.set('debug', true)
 }
-
-require('./config/routes')(app)
+if(arguments.length>0 && arguments[0]=="api"){
+    require('./config/routesapi')(app)
+}else{
+    require('./config/routes')(app)
+}
 
 app.listen(port)
 app.locals.moment = require('moment')

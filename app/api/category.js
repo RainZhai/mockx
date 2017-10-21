@@ -11,7 +11,7 @@ exports.new = function(req, res) {
 
 // admin post
 exports.save = function(req, res) {
-    var _category = req.body.category
+    var _category = req.query.category
     var category = new Category(_category)
 
     category.save(function(err, category) {
