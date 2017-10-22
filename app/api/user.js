@@ -62,6 +62,7 @@ exports.signin = function (req, res) {
                         } else {
                             if (isMatch) {
                                 req.session.user = user
+                                console.log(req.session)
 
                                 res.jsonp({success: true, msg: "登录成功"})
                             } else {
