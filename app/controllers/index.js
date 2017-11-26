@@ -8,13 +8,14 @@ exports.index = function(req, res) {
         .find({})
         .populate({
             path: 'mocks',
-            select: 'title poster',
+            select: 'name',
             options: { limit: 6 }
         })
         .exec(function(err, categories) {
             if (err) {
                 console.log(err)
             }
+            console.log(categories)
 
             res.render('index', {
                 title: 'mockx 首页',
@@ -36,7 +37,7 @@ exports.search = function(req, res) {
             .find({ _id: catId })
             .populate({
                 path: 'mocks',
-                select: 'name poster'
+                select: 'name'
             })
             .exec(function(err, categories) {
                 if (err) {

@@ -5,14 +5,14 @@ block content
     .row
       .panel.panel-default
         .panel-heading
-          h3 #{keyword}
+          p #{keyword}
         .panel-body
           if mocks && mocks.length > 0
             each item in mocks
-              .col-md-2  
-                    h3 #{item.name}
-                    p
-                      a.btn.btn-primary(href="/mock/#{item._id}", role="button")查看
+              span #{item.name} 
+              a.btn.btn-primary(href="/mock/#{item._id}", role="button") 查看
+          else
+            p 无相关结果
       ul.pagination
         - for (var i = 0; i < totalPage; i++) {
           - if (currentPage == (i + 1)) {

@@ -9,20 +9,22 @@ block content
             th 类别
             th 名称 
             th 更新时间
-            th 查看
-            th 修改
-            th 删除
+            th url
+            th 操作
         tbody
           each item in mocks
             tr(class="item-id-#{item._id}")
               td #{item.category.name}
               td #{item.name}
               td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+              td 
+                a(target="_blank", href="/mock/#{item.category.name}/#{item.name}") /mock/#{item.category.name}/#{item.name}
               td
                 a.btn.btn-info(target="_blank", href="/mock/#{item._id}") 查看
                 &nbsp;
                 a.btn.btn-info(target="_blank", href="/mock/#{item.category.name}/#{item.name}") 查看json
-              td: a.btn.btn-info(target="_blank", href="/admin/mock/update/#{item._id}") 修改
-              td
+                &nbsp;
+                a.btn.btn-info(target="_blank", href="/admin/mock/update/#{item._id}") 修改
+                &nbsp;
                 button.btn.btn-danger.del(type="button", data-id="#{item._id}") 删除
   script(src="/js/admin.js")
