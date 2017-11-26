@@ -1,35 +1,32 @@
-.container
-  .row
-    .page-header.clearfix
-      h1= title
-      .col-md-4
-        
-      .col-md-8
-        form(method='GET', action='/results')
-          .input-group.col-sm-4.pull-right
-            input.form-control(type='text', name='q')
-            span.input-group-btn
-              button.btn.btn-default(type='submit') 搜索
-.navbar.navbar-default.navbar-fixed-top
+.navbar.navbar-default
   .container
-    p.navbar-text.navbar-header
-      a(href="/admin/mock/new") 新增mock数据 
-      span &nbsp;
-      a(href="/admin/mock/list") 获取mock列表
-      span &nbsp;
-      a(href="/admin/category/list") 获取分类列表
-      span &nbsp;
-      a(href="/admin/category/new") 添加分类
-    if user
-      p.navbar-text.navbar-right
-        span 欢迎您,#{user.name}
-        span &nbsp;|&nbsp;
-        a.navbar-link(href="/logout") 登出
-    else
-      p.navbar-text.navbar-right
-        a.navbar-link(href="#", data-toggle="modal", data-target="#signupModal") 注册
-        span &nbsp;|&nbsp;
-        a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") 登录
+    .navbar-header
+      a.navbar-brand(href="/") Mockx
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+       li
+        a(href="/admin/mock/new") 新增
+       li
+        a(href="/admin/mock/list") 列表
+       li
+        a(href="/admin/category/list") 分类列表
+       li
+        a(href="/admin/category/new") 添加分类
+      ul.nav.navbar-nav.navbar-right
+        if user
+          li
+            a(href="#") 欢迎您,#{user.name}
+          li
+            a(href="/logout") 登出
+        else
+          li
+            a(href="#", data-toggle="modal", data-target="#signupModal") 注册
+          li
+            a(href="#", data-toggle="modal", data-target="#signinModal") 登录
+      form.navbar-form.navbar-right(method='GET', action='/results')
+        .form-group
+          input.form-control(type='text', name='q')
+        button.btn.btn-default(type='submit') 搜索
 #signupModal.modal.fade
   .modal-dialog
     .modal-content
