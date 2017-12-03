@@ -3,28 +3,42 @@ extends ../layout
 block content
   .container
     .row
-      table.table.table-hover.table-bordered
-        thead
-          tr
-            th 类别
-            th 名称 
-            th 更新时间
-            th url
-            th 操作
-        tbody
-          each item in mocks
-            tr(class="item-id-#{item._id}")
-              td #{item.category.name}
-              td #{item.name}
-              td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
-              td 
-                a(target="_blank", href="/mock/#{item.category.name}/#{item.name}") /mock/#{item.category.name}/#{item.name}
-              td
-                a.btn.btn-info(target="_blank", href="/mock/#{item._id}") 查看
-                &nbsp;
-                a.btn.btn-info(target="_blank", href="/mock/#{item.category.name}/#{item.name}") 查看json
-                &nbsp;
-                a.btn.btn-info(target="_blank", href="/admin/mock/update/#{item._id}") 修改
-                &nbsp;
-                button.btn.btn-danger.del(type="button", data-id="#{item._id}") 删除
+      if mocks && mocks.length > 0
+        table.table.table-hover.table-bordered
+          thead
+            tr
+              th 类别
+              th 名称 
+              th 更新时间
+              th url
+              th 操作
+          tbody
+            each item in mocks
+              tr(class="item-id-#{item._id}")
+                td #{item.category.name}
+                td #{item.name}
+                td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                td 
+                  a(target="_blank", href="/mock/#{item.category.name}/#{item.name}") /mock/#{item.category.name}/#{item.name}
+                td
+                  a.btn.btn-info(target="_blank", href="/mock/#{item._id}") 查看
+                  &nbsp;
+                  a.btn.btn-info(target="_blank", href="/mock/#{item.category.name}/#{item.name}") 查看json
+                  &nbsp;
+                  a.btn.btn-info(target="_blank", href="/admin/mock/update/#{item._id}") 修改
+                  &nbsp;
+                  button.btn.btn-danger.del(type="button", data-id="#{item._id}") 删除
+      else
+        p 无相关结果
+      ul.pagination
+        - for (var i = 0; i < totalPage; i++) {
+          - if (currentPage == (i + 1)) {
+              li.active
+                span #{currentPage}
+          - }
+          - else {
+              li
+                a(href='/admin/mock/list?p=#{i}') #{i + 1}
+          - }
+        - }
   script(src="/js/admin.js")

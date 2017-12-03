@@ -126,6 +126,10 @@ exports.save = function(req, res) {
 
 // list page
 exports.list = function(req, res) {
+    var q = req.query.q
+    var page = parseInt(req.query.p, 10) || 0
+    var count = 5
+    var index = page * count
     Mock.find({})
         .populate('category', 'name')
         .exec(function(err, mocks) {
@@ -133,9 +137,13 @@ exports.list = function(req, res) {
                 console.log(err)
             }
 
+            var results = mocks.slice(index, index + count)
+            console.log(results.length)
             res.render('list', {
                 title: 'mockx 列表页',
-                mocks: mocks
+                currentPage: (page + 1),
+                totalPage: Math.ceil(mocks.length / count),
+                mocks: results
             })
         })
 }

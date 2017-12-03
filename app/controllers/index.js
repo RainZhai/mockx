@@ -29,7 +29,7 @@ exports.search = function(req, res) {
     var catId = req.query.cat
     var q = req.query.q
     var page = parseInt(req.query.p, 10) || 0
-    var count = 2
+    var count = 4
     var index = page * count
 
     if (catId) {
