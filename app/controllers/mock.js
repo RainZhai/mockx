@@ -66,7 +66,8 @@ exports.savePoster = function(req, res, next) {
 exports.save = function(req, res) {
     var id = req.body.mock._id
     var mockObj = req.body.mock
-    var _mock
+    var _mock;
+    mockObj.json = mockObj.json.replace(/\'/g,'"')
 
     if (req.poster) {
         mockObj.poster = req.poster
