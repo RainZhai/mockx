@@ -16,7 +16,6 @@ exports.detail = function(req, res) {
         })
     })
 }
-
 // detailJson page
 exports.jsonDetail = function(req, res) {
     var categoryName = req.params.categoryName
@@ -24,9 +23,8 @@ exports.jsonDetail = function(req, res) {
 
     Category.findOne({ "name": categoryName }, function(err, category) {
         Mock.findOne({ "category": category.id, "name": name }, function(err, mock) {
-            res.json({
-                data: mock.json
-            })
+            //mock.json = JSON.parse(mock.json)
+            res.json(JSON.parse(mock.json))
         })
     })
 }
