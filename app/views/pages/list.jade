@@ -24,10 +24,12 @@ block content
                   a.btn.btn-info(target="_blank", href="/mock/#{item._id}") 查看
                   &nbsp;
                   a.btn.btn-info(target="_blank", href="/mock/#{item.category.name}/#{item.name}") 查看json
-                  &nbsp;
-                  a.btn.btn-info(target="_blank", href="/admin/mock/update/#{item._id}") 修改
-                  &nbsp;
-                  button.btn.btn-danger.del(type="button", data-id="#{item._id}") 删除
+                  - if (admin) {
+                    &nbsp;
+                    a.btn.btn-info(target="_blank", href="/admin/mock/update/#{item._id}") 修改
+                    &nbsp;
+                    button.btn.btn-danger.del(type="button", data-id="#{item._id}") 删除
+                  - }
       else
         p 无相关结果
       ul.pagination

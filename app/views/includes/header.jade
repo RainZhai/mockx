@@ -4,14 +4,21 @@
       a.navbar-brand(href="/") Mockx
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-       li
-        a(href="/admin/mock/new") 新增
-       li
-        a(href="/admin/mock/list") 列表
-       li
-        a(href="/admin/category/list") 分类列表
-       li
-        a(href="/admin/category/new") 添加分类
+        if user
+          li
+            a(href="/admin/mock/new") 新增数据
+          li
+            a(href="/admin/mock/list") mock列表
+          li
+            a(href="/admin/category/list") 分类列表
+          li
+            a(href="/admin/category/new") 添加分类
+          li
+            a(href="/admin/user/list") 用户列表
+        else
+          li
+            a(href="/mocklist") mock列表
+
       ul.nav.navbar-nav.navbar-right
         if user
           li

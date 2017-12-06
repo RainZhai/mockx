@@ -46,6 +46,7 @@ exports.update = function(req, res) {
 
     if (id) {
         Mock.findById(id, function(err, mock) {
+            mock.json = mock.json.replace(/\'/g,'"')
             Category.find({}, function(err, categories) {
                 res.render('admin', {
                     title: 'mockx 后台更新页',
@@ -122,12 +123,11 @@ exports.save = function(req, res) {
         })
     }
 }
-
-// list page
-exports.list = function(req, res) {
+//admin list page
+exports.adminlist = function(req, res) {
     var q = req.query.q
     var page = parseInt(req.query.p, 10) || 0
-    var count = 5
+    var count = 10
     var index = page * count
     Mock.find({})
         .populate('category', 'name')
@@ -139,6 +139,31 @@ exports.list = function(req, res) {
             var results = mocks.slice(index, index + count)
             console.log(results.length)
             res.render('list', {
+                admin: true,
+                title: 'mockx 列表页',
+                currentPage: (page + 1),
+                totalPage: Math.ceil(mocks.length / count),
+                mocks: results
+            })
+        })
+}
+// list page
+exports.list = function(req, res) {
+    var q = req.query.q
+    var page = parseInt(req.query.p, 10) || 0
+    var count = 10
+    var index = page * count
+    Mock.find({})
+        .populate('category', 'name')
+        .exec(function(err, mocks) {
+            if (err) {
+                console.log(err)
+            }
+
+            var results = mocks.slice(index, index + count)
+            console.log(results.length)
+            res.render('list', {
+                admin: false,
                 title: 'mockx 列表页',
                 currentPage: (page + 1),
                 totalPage: Math.ceil(mocks.length / count),

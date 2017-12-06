@@ -18,6 +18,7 @@ exports.index = function(req, res) {
             console.log(categories)
 
             res.render('index', {
+                user: req.session.user,
                 title: 'mockx 首页',
                 categories: categories
             })

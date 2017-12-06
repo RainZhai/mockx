@@ -32,7 +32,8 @@ module.exports = function(app) {
     app.get('/admin/mock/new', User.signinRequired, User.adminRequired, Mock.new)
     app.get('/admin/mock/update/:id', User.signinRequired, User.adminRequired, Mock.update)
     app.post('/admin/mock', User.signinRequired, User.adminRequired, Mock.savePoster, Mock.save)
-    app.get('/admin/mock/list', User.signinRequired, User.adminRequired, Mock.list)
+    app.get('/admin/mock/list', User.signinRequired, User.adminRequired, Mock.adminlist)
+    app.get('/mocklist', Mock.list)
     app.delete('/admin/mock/list', User.signinRequired, User.adminRequired, Mock.del)
 
     // Comment

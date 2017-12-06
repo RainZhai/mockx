@@ -13,7 +13,7 @@ exports.detail = function(req, res) {
         res.jsonp({
             success: true,
             data: {
-                title: 'mockx 详情页',
+                title: 'mockx 详情',
                 mock: mock
             }
         })
@@ -27,9 +27,7 @@ exports.jsonDetail = function(req, res) {
 
     Category.findOne({ "name": categoryName }, function(err, category) {
         Mock.findOne({ "category": category.id, "name": name }, function(err, mock) {
-            res.jsonp({
-                data: mock.json
-            })
+            res.jsonp(JSON.parse(mock.json))
         })
     })
 }
@@ -54,6 +52,7 @@ exports.update = function(req, res) {
 
     if (id) {
         Mock.findById(id, function(err, mock) {
+            mock.json = mock.json.replace(/\'/g,'"')
             Category.find({}, function(err, categories) {
                 res.jsonp({
                     success: true,
@@ -78,6 +77,7 @@ exports.save = function(req, res) {
     var id = req.query.mock._id
     var mockObj = req.query.mock
     var _mock
+    mockObj.json = mockObj.json.replace(/\'/g,'"')
 
     if (req.poster) {
         mockObj.poster = req.poster
