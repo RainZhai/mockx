@@ -78,8 +78,8 @@ exports.save = function(req, res) {
     var id = req.query.mock._id
     var mockObj = req.query.mock
     var _mock
+    mockObj.name = util.filter(mockObj.name)
     mockObj.json = util.filter(mockObj.json).replace(/\'/g,'"')
-    console.log(mockObj.json)
     if (req.poster) {
         mockObj.poster = req.poster
     }

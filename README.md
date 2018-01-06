@@ -6,9 +6,13 @@ http://nodejs.org/download/
 http://mongodb.com
 ## 安装依赖包
 npm install / yarn install
+## 设置数据库
+将app.js中dbUrl设为创建的数据库url
 ## 运行程序
 npm run start / yarn run start
-##注意
+## 提供所有功能api
+npm run startapi / yarn run startapi
+## 注意
 若需设置超级管理员权限，需在数据库将user的role值改为大于10
 ## 使用步骤
 * 注册登录
