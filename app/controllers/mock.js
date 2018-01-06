@@ -1,6 +1,7 @@
 var mongoose = require('mongoose')
 var Mock = mongoose.model('Mock')
 var Category = mongoose.model('Category')
+var util = require('../util/util')
 var _ = require('underscore')
 var fs = require('fs')
 var path = require('path')
@@ -46,7 +47,7 @@ exports.update = function(req, res) {
 
     if (id) {
         Mock.findById(id, function(err, mock) {
-            mock.json = mock.json.replace(/\'/g,'"')
+            mock.json = util.filter(mock.json).replace(/\'/g,'"')
             Category.find({}, function(err, categories) {
                 res.render('admin', {
                     title: 'mockx 后台更新页',
@@ -68,7 +69,8 @@ exports.save = function(req, res) {
     var id = req.body.mock._id
     var mockObj = req.body.mock
     var _mock;
-    mockObj.json = mockObj.json.replace(/\'/g,'"')
+    mockObj.name = util.filter(mockObj.name)
+    mockObj.json = util.filter(mockObj.json).replace(/\'/g,'"')
 
     if (req.poster) {
         mockObj.poster = req.poster
@@ -93,7 +95,7 @@ exports.save = function(req, res) {
         _mock = new Mock(mockObj)
 
         var categoryId = mockObj.category
-        var categoryName = mockObj.categoryName
+        var categoryName = util.filter(mockObj.categoryName)
 
         _mock.save(function(err, mock) {
             if (err) {

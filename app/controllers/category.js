@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var Category = mongoose.model('Category')
+var util = require('../util/util')
 
 // admin new page
 exports.new = function(req, res) {
@@ -12,6 +13,7 @@ exports.new = function(req, res) {
 // admin post
 exports.save = function(req, res) {
     var _category = req.body.category
+    _category.name = util.filter(_category.name);
     var category = new Category(_category)
 
     category.save(function(err, category) {

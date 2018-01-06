@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
 var Mock = mongoose.model('Mock')
 var Category = mongoose.model('Category')
 var _ = require('underscore')
+var util = require('../util/util')
 var fs = require('fs')
 var path = require('path')
 
@@ -52,7 +53,7 @@ exports.update = function(req, res) {
 
     if (id) {
         Mock.findById(id, function(err, mock) {
-            mock.json = mock.json.replace(/\'/g,'"')
+            mock.json = util.filter(mock.json).replace(/\'/g,'"')
             Category.find({}, function(err, categories) {
                 res.jsonp({
                     success: true,
@@ -77,8 +78,8 @@ exports.save = function(req, res) {
     var id = req.query.mock._id
     var mockObj = req.query.mock
     var _mock
-    mockObj.json = mockObj.json.replace(/\'/g,'"')
-
+    mockObj.json = util.filter(mockObj.json).replace(/\'/g,'"')
+    console.log(mockObj.json)
     if (req.poster) {
         mockObj.poster = req.poster
     }
@@ -107,7 +108,7 @@ exports.save = function(req, res) {
         _mock = new Mock(mockObj)
 
         var categoryId = mockObj.category
-        var categoryName = mockObj.categoryName
+        var categoryName = util.filter(mockObj.categoryName)
 
         _mock.save(function(err, mock) {
             if (err) {

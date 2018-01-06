@@ -8,6 +8,8 @@ http://mongodb.com
 npm install / yarn install
 ## 运行程序
 npm run start / yarn run start
+##注意
+若需设置超级管理员权限，需在数据库将user的role值改为大于10
 ## 使用步骤
 * 注册登录
 ![注册](https://github.com/RainZhai/mockx/blob/master/public/screen/s1.png)
