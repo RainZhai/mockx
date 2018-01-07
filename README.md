@@ -13,7 +13,7 @@ npm run start / yarn run start
 ## 提供所有功能api
 npm run startapi / yarn run startapi
 ## 注意
-若需设置超级管理员权限，需在数据库将user的role值改为大于10
+若需设置超级管理员权限，需在数据库将user的role值改为大于10即可
 ## 使用步骤
 * 注册登录
 ![注册](https://github.com/RainZhai/mockx/blob/master/public/screen/s1.png)
