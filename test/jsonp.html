@@ -16,7 +16,7 @@
   $.getJSON("http://127.0.0.1:3000/admin/mock/list?callback=?",function(data) {  
     console.log(data)
   });
-  $.getJSON("http://127.0.0.1:3000/admin/mock?callback=?",{mock:{name:"test1",json:"{hell:'sss'}"}},function(data) {  
+  $.getJSON("http://127.0.0.1:3000/admin/mock?callback=?",{mock:{name:"test1",json:"{hell:'sss'}",category: '5a23ffbea07f7dbd0372cd65'}},function(data) {  
     console.log(data)
   });
   $.getJSON("http://127.0.0.1:3000/admin/category/list?callback=?",{},function(data) {  

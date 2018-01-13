@@ -108,7 +108,7 @@ exports.save = function(req, res) {
         _mock = new Mock(mockObj)
 
         var categoryId = mockObj.category
-        var categoryName = util.filter(mockObj.categoryName)
+        var categoryName = mockObj.categoryName
 
         _mock.save(function(err, mock) {
             if (err) {
@@ -127,7 +127,7 @@ exports.save = function(req, res) {
                 })
             } else if (categoryName) {
                 var category = new Category({
-                    name: categoryName,
+                    name: util.filter(categoryName),
                     mocks: [mock._id]
                 })
 
