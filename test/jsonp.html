@@ -22,6 +22,15 @@
   $.getJSON("http://127.0.0.1:3000/admin/category/list?callback=?",{},function(data) {  
     console.log(data)
   });
+
+  $.getJSON("http://127.0.0.1:3000/admin/mock?callback=?",{mock:{_id:"5a5a2626f2a144055f13c046" ,name:"test1",json:"{helldd:'wwwwwwww'}",category: '5a23ffbea07f7dbd0372cd65'}},function(data) {
+    console.log(data)
+  });
+
+ $.getJSON("http://127.0.0.1:3000/admin/mock/del?callback=?",{id:"5a5a20a90adc76055b0e964e"},function(data) {
+    console.log(data)
+  });
+
 </script> 
 </body>
 </html>

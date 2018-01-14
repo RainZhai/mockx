@@ -53,7 +53,8 @@ exports.update = function(req, res) {
 
     if (id) {
         Mock.findById(id, function(err, mock) {
-            mock.json = util.filter(mock.json).replace(/\'/g,'"')
+            console.log(mock.json);
+            //mock.json = util.filter(mock.json).replace(/\'/g,'"')
             Category.find({}, function(err, categories) {
                 res.jsonp({
                     success: true,
@@ -173,9 +174,9 @@ exports.del = function(req, res) {
         Mock.remove({ _id: id }, function(err, mock) {
             if (err) {
                 console.log(err)
-                res.jsonp({ success: 0 })
+                res.jsonp({ success: false })
             } else {
-                res.jsonp({ success: 1 })
+                res.jsonp({ success: true })
             }
         })
     }
