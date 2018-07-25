@@ -2,22 +2,22 @@ var mongoose = require('mongoose')
 var User = mongoose.model('User')
 
 // signup
-exports.showSignup = function(req, res) {
+exports.showSignup = function (req, res) {
   res.render('signup', {
     title: '注册页面'
   })
 }
 
-exports.showSignin = function(req, res) {
+exports.showSignin = function (req, res) {
   res.render('signin', {
     title: '登录页面'
   })
 }
 
-exports.signup = function(req, res) {
+exports.signup = function (req, res) {
   var _user = req.body.user
 
-  User.findOne({name: _user.name},  function(err, user) {
+  User.findOne({ name: _user.name }, function (err, user) {
     if (err) {
       console.log(err)
     }
@@ -27,7 +27,7 @@ exports.signup = function(req, res) {
     }
     else {
       user = new User(_user)
-      user.save(function(err, user) {
+      user.save(function (err, user) {
         if (err) {
           console.log(err)
         }
@@ -39,12 +39,12 @@ exports.signup = function(req, res) {
 }
 
 // signin
-exports.signin = function(req, res) {
+exports.signin = function (req, res) {
   var _user = req.body.user
   var name = _user.name
   var password = _user.password
 
-  User.findOne({name: name}, function(err, user) {
+  User.findOne({ name: name }, function (err, user) {
     if (err) {
       console.log(err)
     }
@@ -53,7 +53,7 @@ exports.signin = function(req, res) {
       return res.redirect('/signup')
     }
 
-    user.comparePassword(password, function(err, isMatch) {
+    user.comparePassword(password, function (err, isMatch) {
       if (err) {
         console.log(err)
       }
@@ -71,7 +71,7 @@ exports.signin = function(req, res) {
 }
 
 // logout
-exports.logout =  function(req, res) {
+exports.logout = function (req, res) {
   delete req.session.user
   //delete app.locals.user
 
@@ -79,8 +79,8 @@ exports.logout =  function(req, res) {
 }
 
 // userlist page
-exports.list = function(req, res) {
-  User.fetch(function(err, users) {
+exports.list = function (req, res) {
+  User.fetch(function (err, users) {
     if (err) {
       console.log(err)
     }
@@ -93,7 +93,7 @@ exports.list = function(req, res) {
 }
 
 // midware for user
-exports.signinRequired = function(req, res, next) {
+exports.signinRequired = function (req, res, next) {
   var user = req.session.user
 
   if (!user) {
@@ -103,7 +103,7 @@ exports.signinRequired = function(req, res, next) {
   next()
 }
 
-exports.adminRequired = function(req, res, next) {
+exports.adminRequired = function (req, res, next) {
   var user = req.session.user
 
   if (user.role <= 10) {

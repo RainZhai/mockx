@@ -1,7 +1,13 @@
 var express = require('express')
 var path = require('path')
 var mongoose = require('mongoose')
-var mongoStore = require('connect-mongo')(express)
+var session = require('express-session');
+var bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
+var multipart = require('connect-multiparty')
+var logger = require('morgan')
+var mongoStore = require('connect-mongo')(session)
+
 var port = process.env.PORT || 3000
 var app = express()
 var fs = require('fs')
@@ -9,14 +15,14 @@ var dbUrl = 'mongodb://127.0.0.1:27017/mockx'
 var arguments = process.argv.splice(2);
 console.log('所传递的参数是：', arguments);
 
-mongoose.connect(dbUrl)
+mongoose.connect(dbUrl,{ useNewUrlParser:true })
 
 // models loading
 var models_path = __dirname + '/app/models'
-var walk = function(path) {
+var walk = function (path) {
     fs
         .readdirSync(path)
-        .forEach(function(file) {
+        .forEach(function (file) {
             var newPath = path + '/' + file
             var stat = fs.statSync(newPath)
 
@@ -32,10 +38,10 @@ var walk = function(path) {
 walk(models_path)
 app.set('views', './app/views/pages')
 app.set('view engine', 'jade')
-app.use(express.bodyParser())
-app.use(express.cookieParser())
-app.use(express.multipart())
-app.use(express.session({
+app.use(bodyParser())
+app.use(cookieParser())
+app.use(multipart())
+app.use(session({
     secret: 'mockx',
     store: new mongoStore({
         url: dbUrl,
@@ -45,13 +51,13 @@ app.use(express.session({
 
 if ('development' === app.get('env')) {
     app.set('showStackError', true)
-    app.use(express.logger(':method :url :status'))
+    app.use(logger(':method :url :status'))
     app.locals.pretty = true
-        //mongoose.set('debug', true)
+    //mongoose.set('debug', true)
 }
-if(arguments.length>0 && arguments[0]=="api"){
+if (arguments.length > 0 && arguments[0] == "api") {
     require('./config/routesapi')(app)
-}else{
+} else {
     require('./config/routes')(app)
 }
 

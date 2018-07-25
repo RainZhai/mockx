@@ -3,10 +3,10 @@ var User = require('../app/api/user')
 var Mock = require('../app/api/mock')
 var Category = require('../app/api/category')
 
-module.exports = function(app) {
+module.exports = function (app) {
 
     // pre handle user
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         var _user = req.session.user
         app.locals.user = _user
         next()

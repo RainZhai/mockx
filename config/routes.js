@@ -1,13 +1,13 @@
 var Index = require('../app/controllers/index')
 var User = require('../app/controllers/user')
 var Mock = require('../app/controllers/mock')
-    //var Comment = require('../app/controllers/comment')
+//var Comment = require('../app/controllers/comment')
 var Category = require('../app/controllers/category')
 
-module.exports = function(app) {
+module.exports = function (app) {
 
     // pre handle user
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         var _user = req.session.user
 
         app.locals.user = _user
