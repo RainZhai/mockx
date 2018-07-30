@@ -26,7 +26,6 @@ exports.jsonDetail = function (req, res) {
         Mock.findOne({ "category": category.id, "name": name }, function (err, mock) {
             //mock.json = JSON.parse(mock.json)
             if (mock.json) {
-                console.log(mock.json)
                 try {
                     res.json(JSON.parse(mock.json))
                 } catch (e) {
@@ -41,7 +40,7 @@ exports.jsonDetail = function (req, res) {
                 res.render('error', {
                     title: '出错啦',
                     info: {
-                        errorjson: "json格式不对哦"
+                        errorjson: "json内容不存在"
                     }
                 })
             }
@@ -60,37 +59,25 @@ exports.new = function (req, res) {
     })
 }
 
-// admin update page
-exports.update = function (req, res) {
-    var id = req.params.id
-
-    if (id) {
-        Mock.findById(id, function (err, mock) {
-            mock.json = util.filter(mock.json).replace(/\'/g, '"')
-            Category.find({}, function (err, categories) {
-                res.render('admin', {
-                    title: 'mockx 后台更新页',
-                    mock: mock,
-                    categories: categories
-                })
-            })
-        })
-    }
-}
-
-// admin poster
-exports.savePoster = function (req, res, next) {
-    next()
-}
-
 // admin post mock
 exports.save = function (req, res) {
     var id = req.body.mock._id
     var mockObj = req.body.mock
     var _mock;
     mockObj.name = util.filter(mockObj.name)
-    mockObj.json = util.filter(mockObj.json).replace(/\'/g, '"')
+    mockObj.json = mockObj.json.replace(/\'/g, '')
 
+    try {
+        JSON.parse(mockObj.json)
+    } catch (e) {
+        res.render('error', {
+            title: '出错啦',
+            info: {
+                errorjson: "json格式不对哦"
+            }
+        })
+        return;
+    }
     if (req.poster) {
         mockObj.poster = req.poster
     }
@@ -144,6 +131,41 @@ exports.save = function (req, res) {
         })
     }
 }
+
+// admin update page
+exports.update = function (req, res) {
+    var id = req.params.id
+
+    if (id) {
+        Mock.findById(id, function (err, mock) {
+            mock.json = mock.json.replace(/\'/g, '')
+            try {
+                JSON.parse(mock.json)
+            } catch (e) {
+                res.render('error', {
+                    title: '出错啦',
+                    info: {
+                        errorjson: "json格式不对哦"
+                    }
+                })
+                return;
+            }
+            Category.find({}, function (err, categories) {
+                res.render('admin', {
+                    title: 'mockx 后台更新页',
+                    mock: mock,
+                    categories: categories
+                })
+            })
+        })
+    }
+}
+
+// admin poster
+exports.savePoster = function (req, res, next) {
+    next()
+}
+
 //admin list page
 exports.adminlist = function (req, res) {
     var q = req.query.q
@@ -158,7 +180,6 @@ exports.adminlist = function (req, res) {
             }
 
             var results = mocks.slice(index, index + count)
-            console.log(results.length)
             res.render('list', {
                 admin: true,
                 title: 'mockx 列表页',
@@ -182,7 +203,6 @@ exports.list = function (req, res) {
             }
 
             var results = mocks.slice(index, index + count)
-            console.log(results.length)
             res.render('list', {
                 admin: false,
                 title: 'mockx 列表页',
