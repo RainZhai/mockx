@@ -54,7 +54,8 @@ exports.new = function (req, res) {
         res.render('admin', {
             title: 'mockx 后台录入页',
             categories: categories,
-            mock: {}
+            mock: {},
+            currentTitle: 'newmock'
         })
     })
 }
@@ -185,7 +186,8 @@ exports.adminlist = function (req, res) {
                 title: 'mockx 列表页',
                 currentPage: (page + 1),
                 totalPage: Math.ceil(mocks.length / count),
-                mocks: results
+                mocks: results,
+                currentTitle: 'mocklist'
             })
         })
 }
@@ -208,7 +210,8 @@ exports.list = function (req, res) {
                 title: 'mockx 列表页',
                 currentPage: (page + 1),
                 totalPage: Math.ceil(mocks.length / count),
-                mocks: results
+                mocks: results,
+                currentTitle: 'mocklist'
             })
         })
 }

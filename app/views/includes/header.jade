@@ -5,18 +5,18 @@
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         if user
-          li
+          li(class="#{currentTitle=='newmock'?'active':''}")
             a(href="/admin/mock/new") 新增数据
-          li
+          li(class="#{currentTitle=='mocklist'?'active':''}")
             a(href="/admin/mock/list") mock列表
-          li
-            a(href="/admin/category/list") 分类列表
-          li
+          li(class="#{currentTitle=='newcate'?'active':''}")
             a(href="/admin/category/new") 添加分类
-          li
+          li(class="#{currentTitle=='catelist'?'active':''}")
+            a(href="/admin/category/list") 分类列表
+          li(class="#{currentTitle=='userlist'?'active':''}")
             a(href="/admin/user/list") 用户列表
         else
-          li
+          li(class="#{currentTitle=='mocklist'?'active':''}")
             a(href="/mocklist") mock列表
 
       ul.nav.navbar-nav.navbar-right
@@ -45,7 +45,7 @@
             input#signupName.form-control(name="user[name]", type="text")
           .form-group
             label(for="signupPassword") 密码
-            input#signupPassword.form-control(name="user[password]", type="text")
+            input#signupPassword.form-control(name="user[password]", type="password")
         .modal-footer
           button.btn.btn-default(type="button", data-dismiss="modal") 关闭
           button.btn.btn-success(type="submit") 提交
@@ -60,7 +60,7 @@
             input#signinName.form-control(name="user[name]", type="text")
           .form-group
             label(for="signinPassword") 密码
-            input#signinPassword.form-control(name="user[password]", type="text")
+            input#signinPassword.form-control(name="user[password]", type="password")
         .modal-footer
           button.btn.btn-default(type="button", data-dismiss="modal") 关闭
           button.btn.btn-success(type="submit") 提交

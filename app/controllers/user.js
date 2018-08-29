@@ -87,7 +87,8 @@ exports.list = function (req, res) {
 
     res.render('userlist', {
       title: 'imooc 用户列表页',
-      users: users
+      users: users,
+      currentTitle: 'userlist'
     })
   })
 }

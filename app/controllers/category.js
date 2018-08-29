@@ -6,7 +6,8 @@ var util = require('../util/util')
 exports.new = function(req, res) {
     res.render('category_admin', {
         title: '分类录入页',
-        category: {}
+        category: {},
+        currentTitle: 'newcate'
     })
 }
 
@@ -34,7 +35,8 @@ exports.list = function(req, res) {
 
         res.render('categorylist', {
             title: '分类列表页',
-            catetories: catetories
+            catetories: catetories,
+            currentTitle: 'catelist'
         })
     })
 }
