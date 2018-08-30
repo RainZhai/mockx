@@ -5,6 +5,7 @@ var ObjectId = Schema.Types.ObjectId
 var MockSchema = new Schema({
     name: String,
     json: String,
+    pagejson: String,
     category: {
         type: ObjectId,
         ref: 'Category'

@@ -30,6 +30,11 @@ block content
           .col-sm-10
             textarea#inputJson.form-control(type="text",rows="32", name="mock[json]", value=mock.json)=mock.json
         .form-group
+          label.col-sm-2.control-label(for="pageJson") 分页信息json
+          .col-sm-10
+            textarea#pageJson.form-control(type="text",rows="12", name="mock[pagejson]", value=mock.pagejson)=mock.pagejson
+            p(style="color:red;") JSON内容属性名需使用引号，否则无法解析
+        .form-group
           .col-sm-2
           .col-sm-10
             button.btn.btn-default(type="submit") 录入

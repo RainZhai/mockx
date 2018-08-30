@@ -11,8 +11,8 @@ var mongoStore = require('connect-mongo')(session)
 var port = process.env.PORT || 8899
 var app = express()
 var fs = require('fs')
-//var dbUrl = 'mongodb://127.0.0.1:27017/mockx'
-var dbUrl = 'mongodb://zhaiyu963:963852741zy@ds129166.mlab.com:29166/mockx'
+var dbUrl = 'mongodb://127.0.0.1:27017/mockx'
+//var dbUrl = 'mongodb://zhaiyu963:963852741zy@ds129166.mlab.com:29166/mockx'
 var arguments = process.argv.splice(2);
 console.log('所传递的参数是：', arguments);
 

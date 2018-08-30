@@ -27,7 +27,12 @@ exports.jsonDetail = function (req, res) {
             //mock.json = JSON.parse(mock.json)
             if (mock.json) {
                 try {
-                    res.json(JSON.parse(mock.json))
+                    if (mock.pagejson) {
+                        var jsonobj = _.extend(JSON.parse(mock.json), JSON.parse(mock.pagejson));
+                        res.json(jsonobj);
+                    } else {
+                        res.json(JSON.parse(mock.json))
+                    }
                 } catch (e) {
                     res.render('error', {
                         title: '出错啦',
